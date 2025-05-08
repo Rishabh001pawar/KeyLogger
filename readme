@@ -1,0 +1,184 @@
+Keylogger#
+
+⚠️ WARNING: This repository is for EDUCATIONAL PURPOSES ONLY in a controlled, sandboxed environment. Unauthorized use of this code to capture data without explicit consent is ILLEGAL and UNETHICAL. Always obtain permission before running on any system.
+This project provides a Python-based keylogger implementation for studying keylogger mechanics and developing defensive cybersecurity techniques (e.g., detection and prevention). It captures keystrokes, mouse events, screenshots, audio, and system information, then sends reports via email. The code is intended for academic research or cybersecurity training in a secure, isolated environment.
+Purpose
+
+Understand how keyloggers function to build better detection tools.
+Learn secure coding practices and the importance of user consent.
+Practice cybersecurity defense by analyzing malicious software behavior.
+
+#Features
+
+Captures keystrokes, mouse movements, clicks, and scrolls using pynput.
+Takes screenshots with pyscreenshot.
+Records audio via sounddevice.
+Collects system information (hostname, IP, OS, etc.).
+Sends reports via SMTP with logs, screenshots, and audio attachments.
+Logs runtime details to a file for debugging and analysis.
+
+Repository Structure
+keylogger-educational/
+├── keylogger.py          # Main keylogger script
+├── keylogger_data/       # Directory for screenshots and audio (created at runtime)
+├── keylogger.log         # Runtime log file (created at runtime)
+├── README.md             # This file
+└── requirements.txt      # Dependency list
+
+#Prerequisites
+
+Sandbox Environment: A virtual machine (e.g., VirtualBox, VMWare) with no network access unless testing SMTP.
+Python: Version 3.7+ (required for Pillow==9.3.0).
+Operating System: Tested on Windows and Linux.
+SMTP Server: Access to a test SMTP server (e.g., Mailtrap) for email testing.
+
+#Installation
+
+Set Up a Sandbox:
+
+Create a virtual machine with Python 3.7+ installed.
+Disable network access unless testing SMTP functionality.
+Enable snapshots to revert changes after testing.
+
+
+#Clone the Repository:
+git clone https://github.com/<your-username>/keylogger-educational.git
+cd keylogger-educational
+
+
+Install Dependencies:Create a virtual environment (optional but recommended) and install dependencies:
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+pip install -r requirements.txt
+
+The requirements.txt should contain:
+pynput==1.7.3
+pyscreenshot==0.5.1
+sounddevice==0.4.3
+Pillow==9.3.0
+numpy
+
+
+Configure SMTP (for email testing):Set environment variables to avoid hardcoding credentials:
+export KEYLOGGER_EMAIL="your_smtp_username"
+export KEYLOGGER_PASSWORD="your_smtp_password"
+export SMTP_SERVER="smtp.mailtrap.io"
+export SMTP_PORT="2525"
+
+Alternatively, edit keylogger.py to replace YOUR_USERNAME and YOUR_PASSWORD with test credentials (not recommended).
+
+
+#Usage
+
+Prepare the Environment:
+
+Ensure the sandbox has no network access unless testing SMTP.
+Verify keylogger_data/ is writable (created automatically).
+
+
+Run the Keylogger:
+python keylogger.py
+
+The script will:
+
+Log keystrokes, mouse events, and system information.
+Save screenshots and audio to keylogger_data/.
+Send reports every 60 seconds (configurable via SEND_REPORT_EVERY) to the specified email.
+Log details to keylogger.log.
+
+
+Stop the Keylogger:
+
+Press Ctrl+C to terminate.
+Alternatively, kill the Python process (pkill python on Linux, taskkill /IM python.exe /F on Windows).
+
+
+
+Testing
+
+Verify Logging:
+
+Check keylogger.log for runtime details:2025-04-29 10:00:00,123 - Mouse moved to 100, 200
+2025-04-29 10:00:01,456 - Screenshot saved to keylogger_data/screenshot_20250429_100001.png
+
+
+
+
+Inspect Output Files:
+
+Check keylogger_data/ for:
+Screenshots (screenshot_*.png).
+Audio files (audio_*.wav).
+
+
+Verify content by opening files.
+
+
+Test Email Delivery (optional):
+
+Configure a test SMTP server (e.g., Mailtrap).
+Enable network access temporarily.
+Run the script and verify emails contain logs, screenshots, and audio attachments.
+Disable network access after testing.
+
+
+Simulate Detection:
+
+Monitor processes:ps aux | grep python  # Linux
+tasklist | findstr python  # Windows
+
+
+Check for file writes in keylogger_data/.
+Use tools like Wireshark to detect SMTP traffic (if network-enabled).
+
+
+Revert Changes:
+
+Restore the VM snapshot to reset the environment.
+Delete keylogger_data/ and keylogger.log if no longer needed.
+
+
+
+Ethical and Legal Considerations
+
+Consent: Never run this code without explicit permission from the system owner. Unauthorized use violates privacy laws (e.g., GDPR, CCPA) and may lead to legal consequences.
+Educational Use: Use only in a sandbox for:
+Studying keylogger behavior.
+Developing detection tools (e.g., monitoring pynput or SMTP activity).
+Learning secure coding practices.
+
+
+Defensive Applications:
+Write scripts to detect pynput or sounddevice processes.
+Use AppLocker (Windows) or AppArmor (Linux) to restrict script execution.
+Monitor network traffic for unauthorized SMTP connections.
+
+
+
+Troubleshooting
+
+ModuleNotFoundError: Verify dependencies in requirements.txt are installed (pip list).
+SMTP Errors: Check SMTP credentials and server settings. Test with Mailtrap for safety.
+Screenshot/Audio Issues: Ensure keylogger_data/ is writable. Check keylogger.log for errors.
+Line 173 Error: If using an older version, ensure img.save(screenshot_path) in the screenshot method (fixed in the latest code).
+
+Contributing
+Contributions are welcome for educational enhancements, such as:
+
+Improved documentation for cybersecurity training.
+Detection scripts for keylogger activity.
+Better error handling or logging.To contribute:
+
+
+Fork the repository.
+Create a branch (git checkout -b feature/your-feature).
+Commit changes (git commit -m "Add your feature").
+Push to the branch (git push origin feature/your-feature).
+Open a pull request with a clear description.
+
+License
+This project is licensed under the MIT License. It is provided "as is" for educational purposes. The author is not responsible for misuse or damages. Use ethically and legally.
+Contact
+For questions or suggestions, open an issue or contact the repository maintainer. Do not use this code for malicious purposes.
+Stay ethical, prioritize privacy, and study safely!
