@@ -1,179 +1,158 @@
-# KeyLogger
+# 🛡️ KeyLogger (Educational Use Only)
 
-⚠️ WARNING: This repository is for EDUCATIONAL PURPOSES ONLY in a controlled, sandboxed environment. Unauthorized use of this code to capture data without explicit consent is ILLEGAL and UNETHICAL. Always obtain permission before running on any system.
-This project provides a Python-based keylogger implementation for studying keylogger mechanics and developing defensive cybersecurity techniques (e.g., detection and prevention). It captures keystrokes, mouse events, screenshots, audio, and system information, then sends reports via email. The code is intended for academic research or cybersecurity training in a secure, isolated environment.<br>
+⚠️ **WARNING**: This repository is strictly for **educational purposes only** in a **controlled, sandboxed environment**. Unauthorized use of this code to capture data without **explicit consent** is **ILLEGAL** and **UNETHICAL**. Always obtain permission before executing it on any system.
 
-# Purpose
+This project demonstrates a Python-based keylogger for understanding keylogger mechanics and improving defensive cybersecurity skills. It captures keystrokes, mouse events, screenshots, audio, and system information, and sends them via email. Intended for research and ethical cybersecurity training only.
 
-Understand how keyloggers function to build better detection tools.<br>
-Learn secure coding practices and the importance of user consent.<br>
-Practice cybersecurity defense by analyzing malicious software behavior.<br>
+---
 
-# Features
+## 🎯 Purpose
 
-Captures keystrokes, mouse movements, clicks, and scrolls using pynput.<br>
-Takes screenshots with pyscreenshot.<br>
-Records audio via sounddevice.<br>
-Collects system information (hostname, IP, OS, etc.).<br>
-Sends reports via SMTP with logs, screenshots, and audio attachments.<br>
-Logs runtime details to a file for debugging and analysis.<br>
+- Understand how keyloggers function to build better detection and prevention tools.
+- Learn secure coding practices and ethical boundaries in cybersecurity.
+- Practice analyzing malicious software behavior in a safe environment.
 
-# Repository Structure
+---
 
-keylogger-educational/<br>
-├── keylogger.py          # Main keylogger script<br>
-├── keylogger_data/       # Directory for screenshots and audio (created at runtime)<br>
-├── keylogger.log         # Runtime log file (created at runtime)<br>
-├── README.md             # This file<br>
-└── requirements.txt      # Dependency list<br>
+## ✨ Features
 
-# Prerequisites
+- ✅ Capture keystrokes, mouse clicks, movements, and scrolls (`pynput`)
+- 📸 Take screenshots (`pyscreenshot`)
+- 🎙️ Record audio via the microphone (`sounddevice`)
+- 🖥️ Collect system information (hostname, IP address, OS, etc.)
+- 📧 Send email reports via SMTP with attached logs, screenshots, and audio
+- 📝 Runtime logs stored in `keylogger.log` for analysis
 
-Sandbox Environment: A virtual machine (e.g., VirtualBox, VMWare) with no network access unless testing SMTP.<br>
-Python: Version 3.7+ (required for Pillow==9.3.0).<br>
-Operating System: Tested on Windows and Linux.<br>
-SMTP Server: Access to a test SMTP server (e.g., Mailtrap) for email testing.<br>
-
-# Installation
-
-Set Up a Sandbox:<br>
-
-Create a virtual machine with Python 3.7+ installed.<br>
-Disable network access unless testing SMTP functionality.<br>
-Enable snapshots to revert changes after testing.<br>
+---
 
 
-# Clone the Repository:
+---
 
-git clone https://github.com/Rishabh001pawar/KeyLogger.git <br>
-cd keyLogger<br>
+## ⚙️ Prerequisites
+
+- **Sandbox Environment**: Virtual machine (e.g., VirtualBox, VMware) without network access (unless testing email functionality).
+- **Python**: Version 3.7+ (for Pillow compatibility).
+- **OS**: Tested on Windows and Linux.
+- **SMTP**: Access to a test SMTP server (e.g., [Mailtrap](https://mailtrap.io)).
+
+---
+
+## 🚀 Installation
+
+### 1. Set Up a Safe Sandbox Environment
+
+- Install Python 3.7+ in a virtual machine.
+- Disable networking unless testing email sending.
+- Create VM snapshots to restore after testing.
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/Rishabh001pawar/KeyLogger.git
+cd KeyLogger
+```
+
+##  Install Dependencies
+
+# Optional: Create a virtual environment
+python -m venv venv
+# Activate it
+source venv/bin/activate      # On Linux/macOS
+venv\Scripts\activate         # On Windows
+
+# Install required libraries
+pip install -r requirements.txt
+
+-Contents of requirements.txt:
+pynput==1.7.3
+pyscreenshot==0.5.1
+sounddevice==0.4.3
+Pillow==9.3.0
+numpy
 
 
-Install Dependencies:Create a virtual environment (optional but recommended) and install dependencies:<br>
-python -m venv venv<br>
-source venv/bin/activate  # Linux/Mac<br>
-venv\Scripts\activate     # Windows<br>
-pip install -r requirements.txt<br>
+## 🧪 Usage
 
-The requirements.txt should contain:<br>
-pynput==1.7.3<br>
-pyscreenshot==0.5.1<br>
-sounddevice==0.4.3<br>
-Pillow==9.3.0<br>
-numpy<br>
+1. Prepare Environment
+Ensure no internet access (except for SMTP testing).
 
+Ensure the keylogger_data/ directory is writable (auto-created if missing).
 
-<h3>Configure SMTP (for email testing):Set environment variables to avoid hardcoding credentials:<h3>
-export KEYLOGGER_EMAIL="your_smtp_username"<br>
-export KEYLOGGER_PASSWORD="your_smtp_password"<br>
-export SMTP_SERVER="smtp.mailtrap.io"<br>
-export SMTP_PORT="2525"<br>
-
-Alternatively, edit keylogger.py to replace YOUR_USERNAME and YOUR_PASSWORD with test credentials (not recommended).<br>
-
-
-# Usage
-
-<h3>repare the Environment:</h3>
-
-Ensure the sandbox has no network access unless testing SMTP.<br>
-Verify keylogger_data/ is writable (created automatically).<br>
-
-
-<h3>Run the Keylogger:</h3>
+2. Run the Keylogger
+```bash
 python keylogger.py
+```
 
-The script will:<br>
+# This will:
 
-Log keystrokes, mouse events, and system information.<br>
-Save screenshots and audio to keylogger_data/.<br>
-Send reports every 60 seconds (configurable via SEND_REPORT_EVERY) to the specified email.<br>
-Log details to keylogger.log.<br>
+-Log keystrokes and mouse events
+-Capture screenshots and audio clip
+-Collect system info
+-Send a report every 60 seconds (customizable)
 
+Write logs to keylogger.log
 
-<h3>Stop the Keylogger:</h3>
-
-Press Ctrl+C to terminate.<br>
-Alternatively, kill the Python process (pkill python on Linux, taskkill /IM python.exe /F on Windows).<br>
-
-
-<h3>Inspect Output Files:</h3>
-
-Check keylogger_data/ for:<br>
-Screenshots (screenshot_*.png).<br>
-Audio files (audio_*.wav).<br>
-
-
-Verify content by opening files.<br>
-
-<h3>Test Email Delivery (optional):</h3>
-
-Configure a test SMTP server (e.g., Mailtrap).<br>
-Enable network access temporarily.<br>
-Run the script and verify emails contain logs, screenshots, and audio attachments.<br>
-Disable network access after testing.<br>
-
-
-<h3>Simulate Detection:</h3>
-
-Monitor processes:ps aux | grep python  # Linux<br>
-tasklist | findstr python  # Windows<br>
-
-<br>
-Check for file writes in keylogger_data/.<br>
-Use tools like Wireshark to detect SMTP traffic (if network-enabled).<br>
-
-
-<h3>Revert Changes:</h3>
-
-Restore the VM snapshot to reset the environment.<br>
-Delete keylogger_data/ and keylogger.log if no longer needed.<br>
+## 3. Stop the Keylogger
+-Press Ctrl + C to manually stop
+-Or terminate process:
+-pkill python (Linux)
+-taskkill /IM python.exe /F (Windows)
 
 
 
-# Ethical and Legal Considerations
+## 📧 Test Email Delivery (Optional)
 
-Consent: Never run this code without explicit permission from the system owner. Unauthorized use violates privacy laws (e.g., GDPR, CCPA) and may lead to legal consequences.<br>
-Educational Use: Use only in a sandbox for:<br>
-Studying keylogger behavior.<br>
-Developing detection tools (e.g., monitoring pynput or SMTP activity).<br>
-Learning secure coding practices.<br>
+-Temporarily re-enable networking
+-Use a test SMTP service like Mailtrap
+-Confirm delivery with attachments
+
+## 🔐 Simulate Detection
+
+-Monitor running processes:
+   <br>-Linux: ps aux | grep python
+   <br>-Windows: tasklist | findstr python
+-Monitor file changes in keylogger_data/
+-Use Wireshark to detect outbound SMTP traffic
+
+## 🧹 Cleanup
+-Restore VM snapshot to revert changes
+-Delete keylogger_data/ and keylogger.log manually if needed
+
+# ⚖️ Ethical and Legal Considerations
+-🔒 NEVER use this on a real or third-party system without explicit consent.
+-Violating privacy laws (e.g., GDPR, CCPA) may lead to legal consequences.
+--Use only for:
+  -Research and education
+  -etection tool development
+  -Secure coding and reverse engineering training
+
+## 🛡️ Defensive Applications
+-Create scripts to detect pynput or sounddevice activity
+-Use OS-level controls like AppLocker (Windows) or AppArmor (Linux)
+-Monitor outbound SMTP or unusual log writes
+
+## 🛠️ Troubleshooting
+-ModuleNotFoundError: Check pip list to verify packages
+-SMTP Errors: Check your credentials and Mailtrap settings
+-Screenshot or Audio Fails: Ensure the VM supports those features and directory is writable
+-Line 173 or img.save() Errors: Use the latest script version with img.save(screenshot_path)
+
+## 🤝 Contributing
+-We welcome educational contributions! You can help by:
+-Improving documentation
+-Adding new detection or analysis tools
+-Enhancing error handling and logging
+
+STEPS:
+```
+git checkout -b feature/your-feature
+git commit -m "Add your feature"
+git push origin feature/your-feature
+# Then open a pull request
+```
+
+##📬 Contact
+For questions, open an issue or contact the repository maintainer.<br>
+✨ Stay ethical. Prioritize privacy. Study safely. ✨<br>
 
 
-<h3>Defensive Applications:</h3>
-Write scripts to detect pynput or sounddevice processes.
-Use AppLocker (Windows) or AppArmor (Linux) to restrict script execution.
-Monitor network traffic for unauthorized SMTP connections.
-
-
-
-# Troubleshooting
-
-ModuleNotFoundError: Verify dependencies in requirements.txt are installed (pip list).<br>
-SMTP Errors: Check SMTP credentials and server settings. Test with Mailtrap for safety.<br>
-Screenshot/Audio Issues: Ensure keylogger_data/ is writable. Check keylogger.log for errors.<br>
-Line 173 Error: If using an older version, ensure img.save(screenshot_path) in the screenshot method (fixed in the latest code).<br>
-
-# Contributing
-Contributions are welcome for educational enhancements, such as:<br>
-
-Improved documentation for cybersecurity training.<br>
-Detection scripts for keylogger activity.<br>
-Better error handling or logging.To contribute:<br>
-
-
-<h2>Fork the repository.</h2>
-``
-Create a branch (git checkout -b feature/your-feature).<br>
-Commit changes (git commit -m "Add your feature").<br>
-Push to the branch (git push origin feature/your-feature).<br>
-Open a pull request with a clear description.<br>
-``
-
-# License
-This project is licensed under the MIT License. It is provided "as is" for educational purposes. The author is not responsible for misuse or damages. Use ethically and legally.
-<br>
-
-# Contact
-For questions or suggestions, open an issue or contact the repository maintainer. Do not use this code for malicious purposes.
-Stay ethical, prioritize privacy, and study safely!
